@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal Markdown Editor</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <button class="tab active" data-tab="editor">Editor</button>
+            <button class="tab" data-tab="output">Output</button>
+        </div>
+        <div class="content">
+            <div id="editor-content" class="tab-content active">
+                <textarea id="markdown-input"></textarea>
+            </div>
+            <div id="output-content" class="tab-content">
+                <div id="markdown-output"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
