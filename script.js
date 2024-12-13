@@ -1,18 +1,15 @@
 const tabs = document.querySelectorAll('.tab');
-const tabContents = document.querySelectorAll('.tab-content');
 const markdownInput = document.getElementById('markdown-input');
 const markdownOutput = document.getElementById('markdown-output');
 
-function showTab(tabId) {
-    tabContents.forEach(content => content.classList.remove('active'));
+function switchTab(tabId) {
     tabs.forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.content > *').forEach(el => el.style.display = 'none');
 
-    document.getElementById(tabId + '-content').classList.add('active');
     document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+    document.querySelector(tabId === 'editor' ? '.editor' : '.output').style.display = 'block';
 
-    if(tabId === 'output') {
-        updateOutput();
-    }
+    if (tabId === 'output') updateOutput();
 }
 
 function updateOutput() {
@@ -21,13 +18,8 @@ function updateOutput() {
     markdownOutput.innerHTML = html;
 }
 
-tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        showTab(tab.getAttribute('data-tab'));
-    });
-});
+// Tab switching
+tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.getAttribute('data-tab'))));
 
-markdownInput.addEventListener('input', updateOutput);
-
-// Set the editor tab to be active on startup
-showTab('editor');
+// Show the editor tab by default
+switchTab('editor');
