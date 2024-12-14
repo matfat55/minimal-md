@@ -23,3 +23,18 @@ tabs.forEach(tab => tab.addEventListener('click', () => switchTab(tab.getAttribu
 
 // Show the editor tab by default
 switchTab('editor');
+
+
+// Save writing to local storage on input
+markdownInput.addEventListener('input', () => {
+    localStorage.setItem('markdownContent', markdownInput.value);
+});
+
+// Load saved writing from local storage when the page loads
+window.addEventListener('load', () => {
+    const savedContent = localStorage.getItem('markdownContent');
+    if (savedContent) {
+        markdownInput.value = savedContent;
+        updateOutput();
+    }
+});
